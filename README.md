@@ -1,4 +1,4 @@
-GOLF => GO FII
+GOLF => GO LANG FII
 ==============
 É um [projeto](https://github.com/riquellopes/fii) que foi originalmente escrito em [nodejs](https://nodejs.org/en/),
 por mim um tempo atrás. Resolvi escrever ele em [GO](https://golang.org/)
