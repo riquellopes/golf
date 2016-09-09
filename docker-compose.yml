@@ -1,0 +1,24 @@
+version: '2'
+services:
+  api:
+    build: .
+    container_name: golf
+    expose:
+     - 5000
+    ports:
+     - 5000:5000
+    volumes:
+     - .:/app
+    working_dir: /app
+    depends_on:
+     - mongo
+    links:
+     - mongo
+    env_file:
+     - .env
+    command: go run golf.go
+  mongo:
+    container_name: mongolf
+    image: mongo
+    expose:
+      - "27017"
