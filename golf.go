@@ -6,11 +6,13 @@ import (
 	"github.com/labstack/echo"
 )
 
+// SearchExemple -
 type SearchExemple struct {
 	One string `json:"exampleONE"`
 	Two string `json:"exampleTWO"`
 }
 
+// Home -
 type Home struct {
 	About         string `json:"about"`
 	Contact       string `json:"contact"`
