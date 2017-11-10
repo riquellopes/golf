@@ -1,6 +1,10 @@
-GOLF => GO LANG FII
+GOLF => GO + LANG + Fundo de Investimento Imobiliário
 ==============
-É um [projeto](https://github.com/riquellopes/fii) que foi originalmente escrito em [nodejs](https://nodejs.org/en/),
-por mim a um tempo atrás. Resolvi escrever ele em [GO](https://golang.org/)
-para analizar em qual das 2 aplicações eu tenho melhor performance. E aproveitar para estudar um pouco de
-[GO](https://golang.org/)
+
+This is na originally [project](https://github.com/riquellopes/fii) wrote in [nodejs](https://nodejs.org/en/) by me. Now I'll rewrite everything in [golang](https://golang.org/).  I would like to analyze the performance between the two projects.  If you've any tips let me know.
+
+#### @TODO
+
+* [ ] Write a crawler.
+* [ ] Write tests to validation the process.
+* [ ] Build docker + docker compose
