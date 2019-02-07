@@ -19,6 +19,6 @@ services:
     command: go run golf.go
   mongo:
     container_name: mongolf
-    image: mongo
+    image: mongo:alpine
     expose:
       - "27017"
