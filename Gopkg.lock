@@ -16,7 +16,7 @@
 [[projects]]
   name = "github.com/antchfx/htmlquery"
   packages = ["."]
-  revision = "b8d36292614567671decfe6f96c7b8c432d3249b"
+  revision = "db5c1236cbb43c58add1164a8b20d844683e537f"
   version = "v1.0.0"
 
 [[projects]]
@@ -173,6 +173,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "827088da31cbbb0ea3cf1468f49abd1648924a447f98ee6a7148a3d4cfcc404f"
+  inputs-digest = "590f14861a4505935816461802c94ab68e72a62ddaa9c86ebc4e1516b97d5c18"
   solver-name = "gps-cdcl"
   solver-version = 1
