@@ -5,7 +5,7 @@ This's an originally [project](https://github.com/riquellopes/fii) it was wrote 
 
 #### @TODO
 
-* [ ] Write a crawler.
+* [x] Write a crawler.
 * [ ] Write tests to validation the process.
 * [ ] Build docker + docker compose
 * [ ] Analyze the performance between the two projects.
