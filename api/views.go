@@ -26,8 +26,8 @@ func Index(c echo.Context) error {
 	home := Home{"Recupera informações sobre proventos dos fii",
 		"http://www.henriquelopes.com.br",
 		"https://github.com/riquellopes/golf",
-		SearchExample{"curl -X GET http://vast-lake-49104.herokuapp.com/api/",
-			"curl -X GET http://vast-lake-49104.herokuapp.com/api/CNES11B"}}
+		SearchExample{"curl -X GET http://thawing-peak-64488.herokuapp.com/api/",
+			"curl -X GET http://thawing-peak-64488.herokuapp.com/api/BCFF11"}}
 	return c.JSON(http.StatusOK, home)
 }
 
