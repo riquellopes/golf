@@ -7,5 +7,5 @@ This's an originally [project](https://github.com/riquellopes/fii) it was wrote 
 
 * [x] Write a crawler.
 * [x] Write tests to validation the process.
-* [ ] Deploy on [heroku](https://www.heroku.com/)
+* [x] Deploy on [heroku](https://www.heroku.com/)
 * [ ] Analyze the performance between the two projects.
