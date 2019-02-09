@@ -6,6 +6,6 @@ This's an originally [project](https://github.com/riquellopes/fii) it was wrote 
 #### @TODO
 
 * [x] Write a crawler.
-* [ ] Write tests to validation the process.
-* [ ] Build docker + docker compose
+* [x] Write tests to validation the process.
+* [ ] Deploy on [heroku](https://www.heroku.com/)
 * [ ] Analyze the performance between the two projects.
