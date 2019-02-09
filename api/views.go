@@ -31,13 +31,6 @@ func Index(c echo.Context) error {
 	return c.JSON(http.StatusOK, home)
 }
 
-// Code -
-func Code(c echo.Context) error {
-	codigo := c.Param("codigo")
-
-	return c.String(http.StatusOK, codigo)
-}
-
 // CodeF -
 func CodeF(list []crawler.FII) echo.HandlerFunc {
 	return func(c echo.Context) error {
