@@ -17,13 +17,12 @@
   name = "github.com/antchfx/htmlquery"
   packages = ["."]
   revision = "db5c1236cbb43c58add1164a8b20d844683e537f"
-  version = "v1.0.0"
 
 [[projects]]
-  branch = "master"
   name = "github.com/antchfx/xmlquery"
   packages = ["."]
-  revision = "63f0f14e6f572258c9ec5fc83b2f9470098c5f62"
+  revision = "8bd964f5eef5a1f086493b5941caae5d3daf76f1"
+  version = "v1.0.0"
 
 [[projects]]
   branch = "master"
@@ -81,7 +80,8 @@
     "context",
     "engine",
     "engine/standard",
-    "log"
+    "log",
+    "test"
   ]
   revision = "e08070379af60f5b9c0fb5bb2d1527ba9624fe43"
   version = "v2.2.0"
@@ -92,18 +92,20 @@
     "color",
     "log"
   ]
-  revision = "f3b1a1b3bd4726161e1200863d278df7da5e66ff"
+  revision = "7fd9f68ece0bcb1a905fac8f1549f0083f71c51b"
+  version = "v0.2.8"
 
 [[projects]]
   name = "github.com/mattn/go-colorable"
   packages = ["."]
-  revision = "ed8eb9e318d7a84ce5915b495b7d35e0cfe7b5a8"
-  version = "v0.0.6"
+  revision = "efa589957cd060542a26d2dd7832fd6a6c6c3ade"
+  version = "v0.1.0"
 
 [[projects]]
   name = "github.com/mattn/go-isatty"
   packages = ["."]
-  revision = "66b8e73f3f5cda9f96b69efd03dd3d7fc4a5cdb8"
+  revision = "6ca4dbf54d38eea1a992b3c722a76a5d1c4cb25c"
+  version = "v0.0.4"
 
 [[projects]]
   name = "github.com/pmezard/go-difflib"
@@ -130,11 +132,19 @@
   revision = "97ee4a9ee6ea01ed0bbf0325dd789f74cac6cb94"
 
 [[projects]]
-  name = "github.com/valyala/fasttemplate"
+  name = "github.com/valyala/bytebufferpool"
   packages = ["."]
-  revision = "3b874956e03f1636d171bda64b130f9135f42cff"
+  revision = "e746df99fe4a3986f4d4f79e13c1e0117ce9c2f7"
+  version = "v1.0.0"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/valyala/fasttemplate"
+  packages = ["."]
+  revision = "dcecefd839c4193db0d35b88ec65b4c12d360ab0"
+
+[[projects]]
+  branch = "master"
   name = "golang.org/x/net"
   packages = [
     "context",
@@ -142,13 +152,13 @@
     "html/atom",
     "html/charset"
   ]
-  revision = "daba796358cd2742b75aae05761f1b898c9f6a5c"
+  revision = "65e2d4e15006aab9813ff8769e768bbf4bb667a0"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/sys"
   packages = ["unix"]
-  revision = "41f3e6584952bb034a481797859f6ab34b6803bd"
+  revision = "3b5209105503162ded1863c307ac66fec31120dd"
 
 [[projects]]
   name = "golang.org/x/text"
@@ -191,6 +201,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "c27333a8fc26e074222f1bc35e3c52304fa4b6e6256747422c54e658bb99dc38"
+  inputs-digest = "090e2edc4c390174191c842e1f4a42625a47f60397969c4109fe250bea3cf827"
   solver-name = "gps-cdcl"
   solver-version = 1
