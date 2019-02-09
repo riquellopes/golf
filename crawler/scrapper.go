@@ -28,14 +28,23 @@ func (f *FII) Equal(code string) bool {
 		strings.ToLower(f.Code), normalize(strings.ToLower(code))) == 0
 }
 
-// Do -
-func Do(list chan []FII) {
+// Collector -
+type Collector interface {
+	Extract() []FII
+}
+
+// FiiCollector -
+type FiiCollector struct {
+}
+
+// Extract -
+func (f *FiiCollector) Extract() []FII {
 	Collector := colly.NewCollector(
 		colly.CacheDir("./.cache"),
 		colly.UserAgent("Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"),
 	)
 
-	fiis := make([]FII, 0, 150)
+	fiis := make([]FII, 0)
 
 	Collector.OnHTML("table tr", func(e *colly.HTMLElement) {
 		ch := e.DOM.Children()
@@ -58,5 +67,10 @@ func Do(list chan []FII) {
 	})
 
 	Collector.Visit(os.Getenv("ENDPOINT"))
-	list <- fiis
+	return fiis
+}
+
+// Do -
+func Do(list chan []FII, collector Collector) {
+	list <- collector.Extract()
 }

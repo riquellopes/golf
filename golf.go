@@ -9,7 +9,7 @@ import (
 
 func main() {
 	fiis := make(chan []crawler.FII)
-	go crawler.Do(fiis)
+	go crawler.Do(fiis, new(crawler.FiiCollector))
 
 	app := echo.New()
 	app.SetDebug(true)
