@@ -1,44 +1,23 @@
 package main
 
 import (
-   "net/http"
-   "github.com/labstack/echo"
-   "github.com/labstack/echo/engine/standard"
+	"github.com/labstack/echo"
+	"github.com/labstack/echo/engine/standard"
+	"github.com/riquellopes/golf/api"
+	"github.com/riquellopes/golf/crawler"
 )
 
-type SearchExemple struct {
-    One string `json:"exampleONE"`
-    Two string `json:"exampleTWO"`
-}
-
-type Home struct {
-    About string `json:"about"`
-    Contact string `json:"contact"`
-    Project string `json:"project"`
-    SearchExemple `json:"search"`
-}
-
 func main() {
-    app := echo.New()
+	fiis := make(chan []crawler.FII)
+	go crawler.Do(fiis)
 
-    app.GET("/", func(c echo.Context) error {
-        home := Home{"Recupera informações sobre proventos dos fii",
-                     "http://www.henriquelopes.com.br",
-                     "https://github.com/riquellopes/fii",
-                     SearchExemple{"curl -X GET http://vast-lake-49104.herokuapp.com/api/",
-                                   "curl -X GET http://vast-lake-49104.herokuapp.com/api/CNES11B"}}
-        return c.JSON(http.StatusOK, home)
-    })
+	app := echo.New()
+	app.SetDebug(true)
 
-    app.GET("/scrap", func(c echo.Context) error {
-        return c.String(http.StatusOK, "scrap")
-    })
+	fii := <-fiis
+	app.GET("/", api.Index)
+	app.GET("/api/", api.AllF(fii))
+	app.GET("/api/:code", api.CodeF(fii))
 
-    app.GET("/:codigo", func(c echo.Context) error {
-        codigo := c.Param("codigo")
-
-        return c.String(http.StatusOK, codigo)
-    })
-
-    app.Run(standard.New(":5000"))
+	app.Run(standard.New(":5000"))
 }
