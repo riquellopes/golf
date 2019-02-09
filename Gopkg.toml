@@ -44,3 +44,8 @@ required = ["github.com/antchfx/htmlquery"]
 [[constraint]]
   name = "github.com/antchfx/htmlquery"
   revision="db5c1236cbb43c58add1164a8b20d844683e537f"
+
+[metadata.heroku]
+  root-package = "github.com/riquellopes/golf"
+  go-version = "1.10.3"
+  install = [ "./..." ]
