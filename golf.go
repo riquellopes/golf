@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/engine/standard"
 	"github.com/riquellopes/golf/api"
@@ -19,5 +21,6 @@ func main() {
 	app.GET("/api/", api.AllF(fii))
 	app.GET("/api/:code", api.CodeF(fii))
 
-	app.Run(standard.New(":5000"))
+	port := os.Getenv("PORT")
+	app.Run(standard.New(":" + port))
 }
