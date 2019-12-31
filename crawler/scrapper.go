@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/gocolly/colly"
 )
@@ -46,16 +47,20 @@ func (f *FiiCollector) Extract() []FII {
 	Collector := colly.NewCollector(
 		colly.UserAgent("Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"),
 		colly.Async(true),
-		colly.MaxDepth(2),
+		colly.CacheDir("./.cache"),
 	)
+
+	Collector.Limit(&colly.LimitRule{
+		DomainGlob:  "*fiis.*",
+		Parallelism: 10,
+		RandomDelay: 5 * time.Second,
+	})
 
 	fiis := make([]FII, 0)
 
 	Collector.OnHTML("div#items-wrapper div", func(e *colly.HTMLElement) {
 		ch := e.DOM.Children()
 		link, _ := ch.Attr("href")
-
-		// fmt.Println(link)
 
 		Collector.Visit(e.Request.AbsoluteURL(link))
 	})
@@ -68,9 +73,9 @@ func (f *FiiCollector) Extract() []FII {
 			Code:         code,
 			BaseDate:     ch.Eq(0).Text(),
 			BasePrice:    ch.Eq(2).Text(),
-			RealYield:    ch.Eq(3).Text(),
+			RealYield:    ch.Eq(4).Text(),
 			PaymentDate:  ch.Eq(1).Text(),
-			PercentYield: ch.Eq(4).Text(),
+			PercentYield: ch.Eq(3).Text(),
 		}
 
 		fiis = append(fiis, fii)
@@ -81,6 +86,7 @@ func (f *FiiCollector) Extract() []FII {
 	})
 
 	Collector.Visit(os.Getenv("ENDPOINT") + "/lista-de-fundos-imobiliarios/")
+	Collector.Wait()
 	return fiis
 }
 
