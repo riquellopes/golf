@@ -1,6 +1,7 @@
 package crawler
 
 import (
+	"log"
 	"os"
 	"strings"
 
@@ -15,11 +16,14 @@ type FII struct {
 	RealYield    string `json:"real_yield"`
 	PaymentDate  string `json:"payment_date"`
 	PercentYield string `json:"percent_yield"`
-	Observations string `json:"observations"`
 }
 
 func normalize(code string) string {
 	return strings.Trim(code, " ")
+}
+
+func getCode(url string) string {
+	return strings.ToUpper(strings.Replace(url, "/", "", 2))
 }
 
 // Equal -
@@ -41,31 +45,42 @@ type FiiCollector struct {
 func (f *FiiCollector) Extract() []FII {
 	Collector := colly.NewCollector(
 		colly.UserAgent("Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"),
+		colly.Async(true),
+		colly.MaxDepth(2),
 	)
 
 	fiis := make([]FII, 0)
 
-	Collector.OnHTML("table tr", func(e *colly.HTMLElement) {
+	Collector.OnHTML("div#items-wrapper div", func(e *colly.HTMLElement) {
 		ch := e.DOM.Children()
+		link, _ := ch.Attr("href")
 
-		if strings.Contains(ch.Eq(0).Text(), "Código") {
-			return
-		}
+		// fmt.Println(link)
+
+		Collector.Visit(e.Request.AbsoluteURL(link))
+	})
+
+	Collector.OnHTML("#last-revenues--table > tbody > tr:nth-child(1)", func(e *colly.HTMLElement) {
+		ch := e.DOM.Children()
+		code := getCode(e.Request.URL.Path)
 
 		fii := FII{
-			Code:         normalize(ch.Eq(0).Text()),
-			BaseDate:     ch.Eq(1).Text(),
+			Code:         code,
+			BaseDate:     ch.Eq(0).Text(),
 			BasePrice:    ch.Eq(2).Text(),
-			RealYield:    ch.Eq(4).Text(),
-			PaymentDate:  ch.Eq(3).Text(),
-			PercentYield: ch.Eq(5).Text(),
-			Observations: ch.Eq(6).Text(),
+			RealYield:    ch.Eq(3).Text(),
+			PaymentDate:  ch.Eq(1).Text(),
+			PercentYield: ch.Eq(4).Text(),
 		}
 
 		fiis = append(fiis, fii)
 	})
 
-	Collector.Visit(os.Getenv("ENDPOINT"))
+	Collector.OnError(func(_ *colly.Response, err error) {
+		log.Println("Something went wrong:", err)
+	})
+
+	Collector.Visit(os.Getenv("ENDPOINT") + "/lista-de-fundos-imobiliarios/")
 	return fiis
 }
 
